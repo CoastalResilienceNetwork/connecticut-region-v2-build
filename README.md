@@ -1,2 +1,2 @@
-# Georgia coastal resilience
+# Connecticut coastal resilience
  
