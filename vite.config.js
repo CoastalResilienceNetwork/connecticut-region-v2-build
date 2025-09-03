@@ -15,7 +15,7 @@ export default defineConfig({
           },
         }),
   quasar()],
-  base:'/connecticut/',
+
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
