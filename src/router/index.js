@@ -5,6 +5,10 @@ const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
     {
+      path: '/',
+      redirect: '/start'
+    },
+    {
       path: '/start',
       name: 'start',
       component: () => import('../views/GetStarted.vue'),
@@ -12,10 +16,32 @@ const router = createRouter({
     {
       path: '/projects',
       name: 'projects',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: () => import('../views/ResilienceProjects.vue'),
+    },
+    {
+      path: '/regional-planning',
+      name: 'rPlanning',
+      component: () => import('../views/RegionalPlanning.vue'),
+    },
+    {
+      path: '/community-planning',
+      name: 'cPlanning',
+      component: () => import('../views/CommunityPlanning.vue'),
+    },
+    {
+      path: '/future-habitat',
+      name: 'futurehab',
+      component: () => import('../views/FutureHabitat.vue'),
+    },
+    {
+      path: '/sea-level-rise',
+      name: 'fslr',
+      component: () => import('../views/FloodSeaLevelRise.vue'),
+    },
+      {
+      path: '/risk-explorer',
+      name: 'risk',
+      component: () => import('../views/RiskExplorer.vue'),
     },
   ],
 })

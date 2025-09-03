@@ -1,7 +1,10 @@
 <script setup>
 </script>
 
+
 <template>
-  
-<div>Risk Explorer</div>
+  <q-bar class="bg-white" style="border-bottom: 1px solid lightgray">
+   <div class="text-caption text-bold">Risk Explorer</div>
+  </q-bar>
 </template>
+
