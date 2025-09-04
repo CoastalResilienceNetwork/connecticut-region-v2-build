@@ -5,8 +5,27 @@ import '@arcgis/map-components/components/arcgis-legend'
 import '@arcgis/map-components/components/arcgis-basemap-gallery'
 import '@arcgis/map-components/components/arcgis-layer-list'
 import '@arcgis/map-components/components/arcgis-search'
-
+import { ref, computed } from 'vue'
 import TheMap from './components/TheMap.vue'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
+const navState = ref(true)
+const getNavWidth = computed(() => {
+  return navState.value ? 'max-width: 200px' : 'max-width: 90px'
+})
+const getWidth = computed(() => {
+  const pixelWidths = {
+    start: 300,
+    projects: 400,
+    rPlanning: 300,
+    cPlanning: 300,
+    futurehab: 300,
+    risk: 300,
+  }
+
+  return 'max-width:' + pixelWidths[route.name] + 'px'
+})
 </script>
 
 <template>
@@ -68,7 +87,7 @@ import TheMap from './components/TheMap.vue'
     </q-header>
 
     <q-page-container class="row">
-      <div class="col bg-blue-grey-3" style="height: 100vh">
+      <div class="col bg-blue-grey-3" :style="getNavWidth">
         <q-tabs
           vertical
           class="text-primary text-left"
@@ -81,50 +100,58 @@ import TheMap from './components/TheMap.vue'
             class="border text-caption text-bold"
             name="start"
             to="/start"
- 
           >
-          <q-item>
-            <q-item-section class="" avatar>
-              <q-icon name="home" size="40px"></q-icon>
-            </q-item-section>
+            <q-item>
+              <q-item-section class="" avatar>
+                <q-icon name="home" size="40px"></q-icon>
+              </q-item-section>
 
-            <q-item-section>
-              <q-item-label class="text-left">Get<br/> Started</q-item-label>
-            </q-item-section>
-          </q-item>
+              <q-item-section v-if="navState">
+                <q-item-label class="text-left"
+                  >Get<br />
+                  Started</q-item-label
+                >
+              </q-item-section>
+            </q-item>
           </q-route-tab>
           <q-route-tab
             :ripple="false"
             class="border text-caption text-bold"
             name="projects"
             to="/projects"
-          
           >
-          <q-item>
-            <q-item-section class="" avatar>
-              <q-img class="bg-white" src="img/projects_icon_sm.png"></q-img>
-            </q-item-section>
+           
+            <q-item>
+              <q-item-section class="" avatar>
+                <q-img class="bg-white" src="img/projects_icon_sm.png"></q-img>
+              </q-item-section>
 
-            <q-item-section>
-              <q-item-label class="text-left">Resilience<br/> Projects</q-item-label>
-            </q-item-section>
-          </q-item>
-        </q-route-tab>
-         <q-route-tab
+              <q-item-section v-if="navState">
+                <q-item-label class="text-left"
+                  >Resilience<br />
+                  Projects</q-item-label
+                >
+              </q-item-section>
+            </q-item>
+          </q-route-tab>
+          <q-route-tab
             :ripple="false"
             class="border text-caption text-bold"
             name="rPlanning"
             to="/regional-planning"
           >
-          <q-item>
-            <q-item-section class="" avatar>
-              <q-img class="" src="img/rPlanning_icon_sm.png"></q-img>
-            </q-item-section>
+            <q-item>
+              <q-item-section class="" avatar>
+                <q-img class="" src="img/rPlanning_icon_sm.png"></q-img>
+              </q-item-section>
 
-            <q-item-section>
-              <q-item-label class="text-left">Regional<br/> Planning</q-item-label>
-            </q-item-section>
-          </q-item>
+              <q-item-section v-if="navState">
+                <q-item-label class="text-left"
+                  >Regional<br />
+                  Planning</q-item-label
+                >
+              </q-item-section>
+            </q-item>
           </q-route-tab>
           <q-route-tab
             :ripple="false"
@@ -132,15 +159,18 @@ import TheMap from './components/TheMap.vue'
             name="cPlanning"
             to="/community-planning"
           >
-           <q-item>
-            <q-item-section class="" avatar>
-              <q-img class="" src="img/cPlanning_icon_sm.png"></q-img>
-            </q-item-section>
+            <q-item>
+              <q-item-section class="" avatar>
+                <q-img class="" src="img/cPlanning_icon_sm.png"></q-img>
+              </q-item-section>
 
-            <q-item-section>
-              <q-item-label class="text-left">Community<br/> Planning</q-item-label>
-            </q-item-section>
-          </q-item>
+              <q-item-section v-if="navState">
+                <q-item-label class="text-left"
+                  >Community<br />
+                  Planning</q-item-label
+                >
+              </q-item-section>
+            </q-item>
           </q-route-tab>
           <q-route-tab
             :ripple="false"
@@ -148,16 +178,19 @@ import TheMap from './components/TheMap.vue'
             name="futureHab"
             to="/future-habitat"
           >
-           <q-item>
-            <q-item-section class="" avatar>
-              <q-img class="" src="img/futhab_icon_sm.png"></q-img>
-            </q-item-section>
+            <q-item>
+              <q-item-section class="" avatar>
+                <q-img class="" src="img/futhab_icon_sm.png"></q-img>
+              </q-item-section>
 
-            <q-item-section>
-              <q-item-label class="text-left">Future<br/> Habitat</q-item-label>
-            </q-item-section>
-          </q-item>
-           </q-route-tab>
+              <q-item-section v-if="navState">
+                <q-item-label class="text-left"
+                  >Future<br />
+                  Habitat</q-item-label
+                >
+              </q-item-section>
+            </q-item>
+          </q-route-tab>
           <q-route-tab
             :ripple="false"
             class="border text-caption text-bold"
@@ -169,8 +202,11 @@ import TheMap from './components/TheMap.vue'
                 <q-img class="" src="img/fslr_icon_sm.png"></q-img>
               </q-item-section>
 
-              <q-item-section>
-                <q-item-label class="text-left">Flood &<br/> Sea Level Rise</q-item-label>
+              <q-item-section v-if="navState">
+                <q-item-label class="text-left"
+                  >Flood &<br />
+                  Sea Level Rise</q-item-label
+                >
               </q-item-section>
             </q-item>
           </q-route-tab>
@@ -185,15 +221,21 @@ import TheMap from './components/TheMap.vue'
                 <q-img class="" src="img/risk_icon_sm.png"></q-img>
               </q-item-section>
 
-              <q-item-section>
-                <q-item-label class="text-left">Risk<br/>Explorer</q-item-label>
+              <q-item-section v-if="navState">
+                <q-item-label class="text-left">Risk<br />Explorer</q-item-label>
               </q-item-section>
             </q-item>
-           </q-route-tab>
+          </q-route-tab>
         </q-tabs>
+        <div style="position: absolute; bottom: 5px; left: 150px" class="half-circle" v-if="navState">
+          <q-btn flat round padding="xs" size="xl" color="white" icon="chevron_left" @click="navState = false"></q-btn>
+        </div>
+        <div style="position: absolute; bottom: 5px; left: 40px" class="half-circle" v-if="!navState">
+          <q-btn flat round padding="xs" size="xl" color="white" icon="chevron_right" @click="navState = true"></q-btn>
+        </div>
       </div>
-      <div class="col-3"><RouterView /></div>
-      <div class="col-7"><the-map></the-map></div>
+      <div class="col" :style="getWidth"><RouterView /></div>
+      <div class="col"><the-map></the-map></div>
     </q-page-container>
   </q-layout>
 </template>
@@ -205,5 +247,11 @@ import TheMap from './components/TheMap.vue'
 .q-tab {
   justify-content: flex-start !important;
   text-align: left !important;
+}
+.half-circle {
+  width: 50px;
+  height: 50px;
+  background-color: #003646;
+  border-radius: 100px 0 0 100px; /* Top-left, Top-right, Bottom-right, Bottom-left */
 }
 </style>
