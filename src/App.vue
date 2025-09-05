@@ -123,7 +123,7 @@ const getWidth = computed(() => {
            
             <q-item class="q-pa-none">
               <q-item-section class="" avatar >
-                <q-img class="bg-primary" src="img/projects_icon_sm.png" ></q-img>
+                <q-img class="bg-white" src="img/projects_icon_sm.png" ></q-img>
               </q-item-section>
 
               <q-item-section v-if="navState">
@@ -142,7 +142,7 @@ const getWidth = computed(() => {
           ><q-tooltip v-if="!navState">Regional Planning</q-tooltip>
             <q-item class="q-pa-none">
               <q-item-section class="" avatar>
-                <q-img class="bg-primary" src="img/rPlanning_icon_sm.png"></q-img>
+                <q-img class="" src="img/rPlanning_icon_sm.png"></q-img>
               </q-item-section>
 
               <q-item-section v-if="navState">
@@ -161,7 +161,7 @@ const getWidth = computed(() => {
           ><q-tooltip v-if="!navState">Community Planning</q-tooltip>
             <q-item class="q-pa-none">
               <q-item-section class="" avatar>
-                <q-img class="bg-primary" src="img/cPlanning_icon_sm.png"></q-img>
+                <q-img src="img/cPlanning_icon_sm.png"></q-img>
               </q-item-section>
 
               <q-item-section v-if="navState">
@@ -180,7 +180,7 @@ const getWidth = computed(() => {
           ><q-tooltip v-if="!navState">Future Habitat</q-tooltip>
             <q-item class="q-pa-none">
               <q-item-section class="" avatar>
-                <q-img class="bg-primary" src="img/futhab_icon_sm.png"></q-img>
+                <q-img src="img/futhab_icon_sm.png"></q-img>
               </q-item-section>
 
               <q-item-section v-if="navState">
@@ -199,7 +199,7 @@ const getWidth = computed(() => {
           ><q-tooltip v-if="!navState">Flood & Sea Level Rise</q-tooltip>
             <q-item class="q-pa-none">
               <q-item-section class="" avatar>
-                <q-img class="bg-primary" src="img/fslr_icon_sm.png"></q-img>
+                <q-img src="img/fslr_icon_sm.png"></q-img>
               </q-item-section>
 
               <q-item-section v-if="navState">
@@ -218,7 +218,7 @@ const getWidth = computed(() => {
           ><q-tooltip v-if="!navState">Risk Explorer</q-tooltip>
             <q-item class="q-pa-none">
               <q-item-section class="" avatar>
-                <q-img class="bg-primary" src="img/risk_icon_sm.png"></q-img>
+                <q-img src="img/risk_icon_sm.png"></q-img>
               </q-item-section>
 
               <q-item-section v-if="navState">

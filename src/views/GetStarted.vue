@@ -1,10 +1,14 @@
 <script setup></script>
 
 <template>
-  <q-bar class="bg-white" style="border-bottom: 1px solid lightgray">
-    <div class="text-caption text-bold">Get Started</div>
-  </q-bar>
-  <q-scroll-area class="q-pa-md" style="height: calc(100vh - 90px)">
+  <div style="background: linear-gradient(180deg,rgba(244, 242, 230, 1) 0%, rgba(243, 242, 230, 1) 24%, rgba(230, 235, 226, 1) 45%, rgba(210, 225, 220, 1) 67%, rgba(212, 218, 202, 1) 100%);">
+    <q-bar class="bg-white" style="border-bottom: 1px solid lightgray">
+        <div class="text-caption text-bold">Get Started</div>
+    </q-bar>
+    
+  <q-scroll-area class="q-pa-md" style="height: calc(100vh - 90px);background: #F4F2E6;
+      background-color: rgba(252, 253, 254, 0.5);">
+  
     <h5 class="q-mt-xs q-mb-sm text-bold">Connecticut</h5>
     <p class="body2">
       Coastal Resilience is a decision support tool that provides local, regional, state and
@@ -83,6 +87,7 @@
       </p>
 
   </q-scroll-area>
+  </div>
 </template>
 <style>
 .accent {
