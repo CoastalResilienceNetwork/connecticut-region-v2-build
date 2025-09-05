@@ -17,7 +17,7 @@ const getNavWidth = computed(() => {
 const getWidth = computed(() => {
   const pixelWidths = {
     start: 350,
-    projects: 400,
+    projects: 435,
     rPlanning: 300,
     cPlanning: 300,
     futurehab: 300,

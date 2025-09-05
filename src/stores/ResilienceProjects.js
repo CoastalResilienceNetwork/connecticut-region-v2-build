@@ -1,9 +1,13 @@
 import { defineStore } from 'pinia';
-import { ref } from 'vue'
+import { ref } from 'vue';
+
+
 export const useProjectsStore = defineStore('projectsStore', () => {
   const symbolizeBy = ref('all');
   const whereAttribute = ref('');
   const whereValue = ref('');
+  const infoTab ='overview';
+  const infoData = ''
   function whereValueOptions(whereAttribute) {
     console.log(whereAttribute)
     const optionsLookup = {
@@ -49,6 +53,8 @@ export const useProjectsStore = defineStore('projectsStore', () => {
     whereAttribute,
     whereValue,
     whereValueOptions,
-    defExp
+    defExp,
+    infoTab,
+    infoData
   };
 });
