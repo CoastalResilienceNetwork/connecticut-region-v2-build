@@ -12,11 +12,11 @@ import { useRoute } from 'vue-router'
 const route = useRoute()
 const navState = ref(true)
 const getNavWidth = computed(() => {
-  return navState.value ? 'max-width: 200px' : 'max-width: 90px'
+  return navState.value ? 'max-width: 180px' : 'max-width: 60px'
 })
 const getWidth = computed(() => {
   const pixelWidths = {
-    start: 300,
+    start: 350,
     projects: 400,
     rPlanning: 300,
     cPlanning: 300,
@@ -100,9 +100,9 @@ const getWidth = computed(() => {
             class="border text-caption text-bold"
             name="start"
             to="/start"
-          >
-            <q-item>
-              <q-item-section class="" avatar>
+          ><q-tooltip v-if="!navState">Get Started</q-tooltip>
+            <q-item class="q-pa-none">
+              <q-item-section class="" avatar >
                 <q-icon name="home" size="40px"></q-icon>
               </q-item-section>
 
@@ -119,11 +119,11 @@ const getWidth = computed(() => {
             class="border text-caption text-bold"
             name="projects"
             to="/projects"
-          >
+          ><q-tooltip v-if="!navState">Regional Resilience Projects</q-tooltip>
            
-            <q-item>
-              <q-item-section class="" avatar>
-                <q-img class="bg-white" src="img/projects_icon_sm.png"></q-img>
+            <q-item class="q-pa-none">
+              <q-item-section class="" avatar >
+                <q-img class="bg-primary" src="img/projects_icon_sm.png" ></q-img>
               </q-item-section>
 
               <q-item-section v-if="navState">
@@ -139,10 +139,10 @@ const getWidth = computed(() => {
             class="border text-caption text-bold"
             name="rPlanning"
             to="/regional-planning"
-          >
-            <q-item>
+          ><q-tooltip v-if="!navState">Regional Planning</q-tooltip>
+            <q-item class="q-pa-none">
               <q-item-section class="" avatar>
-                <q-img class="" src="img/rPlanning_icon_sm.png"></q-img>
+                <q-img class="bg-primary" src="img/rPlanning_icon_sm.png"></q-img>
               </q-item-section>
 
               <q-item-section v-if="navState">
@@ -158,10 +158,10 @@ const getWidth = computed(() => {
             class="border text-caption text-bold"
             name="cPlanning"
             to="/community-planning"
-          >
-            <q-item>
+          ><q-tooltip v-if="!navState">Community Planning</q-tooltip>
+            <q-item class="q-pa-none">
               <q-item-section class="" avatar>
-                <q-img class="" src="img/cPlanning_icon_sm.png"></q-img>
+                <q-img class="bg-primary" src="img/cPlanning_icon_sm.png"></q-img>
               </q-item-section>
 
               <q-item-section v-if="navState">
@@ -177,10 +177,10 @@ const getWidth = computed(() => {
             class="border text-caption text-bold"
             name="futureHab"
             to="/future-habitat"
-          >
-            <q-item>
+          ><q-tooltip v-if="!navState">Future Habitat</q-tooltip>
+            <q-item class="q-pa-none">
               <q-item-section class="" avatar>
-                <q-img class="" src="img/futhab_icon_sm.png"></q-img>
+                <q-img class="bg-primary" src="img/futhab_icon_sm.png"></q-img>
               </q-item-section>
 
               <q-item-section v-if="navState">
@@ -196,10 +196,10 @@ const getWidth = computed(() => {
             class="border text-caption text-bold"
             name="fslr"
             to="/sea-level-rise"
-          >
-            <q-item>
+          ><q-tooltip v-if="!navState">Flood & Sea Level Rise</q-tooltip>
+            <q-item class="q-pa-none">
               <q-item-section class="" avatar>
-                <q-img class="" src="img/fslr_icon_sm.png"></q-img>
+                <q-img class="bg-primary" src="img/fslr_icon_sm.png"></q-img>
               </q-item-section>
 
               <q-item-section v-if="navState">
@@ -215,10 +215,10 @@ const getWidth = computed(() => {
             class="border text-caption text-bold"
             name="risk"
             to="/risk-explorer"
-          >
-            <q-item>
+          ><q-tooltip v-if="!navState">Risk Explorer</q-tooltip>
+            <q-item class="q-pa-none">
               <q-item-section class="" avatar>
-                <q-img class="" src="img/risk_icon_sm.png"></q-img>
+                <q-img class="bg-primary" src="img/risk_icon_sm.png"></q-img>
               </q-item-section>
 
               <q-item-section v-if="navState">
@@ -227,10 +227,10 @@ const getWidth = computed(() => {
             </q-item>
           </q-route-tab>
         </q-tabs>
-        <div style="position: absolute; bottom: 5px; left: 150px" class="half-circle" v-if="navState">
+        <div style="position: absolute; bottom: 5px; left: 130px" class="half-circle" v-if="navState">
           <q-btn flat round padding="xs" size="xl" color="white" icon="chevron_left" @click="navState = false"></q-btn>
         </div>
-        <div style="position: absolute; bottom: 5px; left: 40px" class="half-circle" v-if="!navState">
+        <div style="position: absolute; bottom: 5px; left: 10px" class="half-circle" v-if="!navState">
           <q-btn flat round padding="xs" size="xl" color="white" icon="chevron_right" @click="navState = true"></q-btn>
         </div>
       </div>
