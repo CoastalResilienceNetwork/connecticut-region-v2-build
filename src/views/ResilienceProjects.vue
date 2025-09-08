@@ -51,6 +51,7 @@ function setVisibleLayer(){
       <div class="row items-center" v-for="(exp,i) in projectStore.defExp" :key="i">
         <div class="col" style="max-width: 190px">
           <q-select
+            @clear="projectStore.defExp.length > 1 ? (projectStore.defExp[i-1].operation = '', projectStore.defExp.splice(i,1)): ''"
             clearable
             outlined
             dense
@@ -103,42 +104,41 @@ function setVisibleLayer(){
         <q-tab-panels v-model="projectStore.infoTab" animated style="border-radius: 0 0 20px 20px; border: 1px solid lightgray">
             <q-tab-panel name="overview">
                 <div class="q-pa-sm">
-                    <p class="text-blue-grey-9 text-bold q-mb-none">Project Name: <span class="text-secondary text-weight-regular"></span></p> 
-                    <p class="text-blue-grey-9 text-bold q-mb-none">Project Type: <span class="text-secondary text-weight-regular"></span></p>
-                    <p class="text-blue-grey-9 text-bold q-mb-none">Project Objective: <span class="text-secondary text-weight-regular"></span></p>
-                    <p class="text-blue-grey-9 text-bold q-mb-none">Strategy: <span class="text-secondary text-weight-regular"></span></p>
-                    <p class="text-blue-grey-9 text-bold q-mb-none">Town: <span class="text-secondary text-weight-regular"></span></p>
-                    <p class="text-blue-grey-9 text-bold q-mb-none">Geo-location: <span class="text-secondary text-weight-regular"></span></p>
+                    <p class="text-blue-grey-9 text-bold q-mb-none">Project Name:  <span class="text-weight-regular" style="color:#2F6384">{{ projectStore.infoData.Project_Name }}</span></p> 
+                    <p class="text-blue-grey-9 text-bold q-mb-none">Project Type: <span class="text-weight-regular" style="color:#2F6384">{{ projectStore.infoData.Primary_Cat }}</span></p>
+                    <p class="text-blue-grey-9 text-bold q-mb-none">Project Objective: <span class="text-weight-regular" style="color:#2F6384">{{ projectStore.infoData.Secondary_Cat }}</span></p>
+                    <p class="text-blue-grey-9 text-bold q-mb-none">Strategy: <span class="text-weight-regular" style="color:#2F6384">{{ projectStore.infoData.Action_ }}</span></p>
+                    <p class="text-blue-grey-9 text-bold q-mb-none">Town: <span class="text-weight-regular" style="color:#2F6384">{{ projectStore.infoData.Town }}</span></p>
+                    <p class="text-blue-grey-9 text-bold q-mb-none">Geo-location: <span class="text-weight-regular" style="color:#2F6384">{{ projectStore.infoData.POINT_X }}, {{ projectStore.infoData.POINT_Y }}</span></p>
                 </div>
             </q-tab-panel>
             <q-tab-panel name="scope">
                  <div class="q-pa-sm">
-                    <p class="text-blue-grey-9 text-bold q-mb-none">Project Name: <span class="text-secondary text-weight-regular"></span></p> 
-                    <p class="text-blue-grey-9 text-bold q-mb-none">Address: <span class="text-secondary text-weight-regular"></span></p>
-                    <p class="text-blue-grey-9 text-bold q-mb-none">Description: <span class="text-secondary text-weight-regular"></span></p>
-                    <p class="text-blue-grey-9 text-bold q-mb-none">Funding: <span class="text-secondary text-weight-regular"></span></p>
-                    <p class="text-blue-grey-9 text-bold q-mb-none">Town: <span class="text-secondary text-weight-regular"></span></p>
-                    <p class="text-blue-grey-9 text-bold q-mb-none">Green Infrastructure: <span class="text-secondary text-weight-regular"></span></p>
-                </div>
+                    <p class="text-blue-grey-9 text-bold q-mb-none">Project Name: <span class="text-weight-regular" style="color:#2F6384">{{ projectStore.infoData.Project_Name }}</span></p> 
+                    <p class="text-blue-grey-9 text-bold q-mb-none">Address: <span class="text-weight-regular" style="color:#2F6384">{{ projectStore.infoData.Address }}</span></p>
+                    <p class="text-blue-grey-9 text-bold q-mb-none">Description: <span class="text-weight-regular" style="color:#2F6384">{{ projectStore.infoData.Project_Desc }}</span></p>
+                    <p class="text-blue-grey-9 text-bold q-mb-none">Funding: <span class="text-weight-regular" style="color:#2F6384">{{ projectStore.infoData.Funding }}</span></p>
+                    <p class="text-blue-grey-9 text-bold q-mb-none">Green Infrastructure: <span class="text-weight-regular" style="color:#2F6384">{{ projectStore.infoData.Green_Infra }}</span></p>
+                  </div>
             </q-tab-panel>
             <q-tab-panel name="site">
                  <div class="q-pa-sm">
-                    <p class="text-blue-grey-9 text-bold q-mb-none">Project Name: <span class="text-secondary text-weight-regular"></span></p> 
-                    <p class="text-blue-grey-9 text-bold q-mb-none">Primary Asset Exposed: <span class="text-secondary text-weight-regular"></span></p>
-                    <p class="text-blue-grey-9 text-bold q-mb-none">Secondary Asset Exposed: <span class="text-secondary text-weight-regular"></span></p>
-                    <p class="text-blue-grey-9 text-bold q-mb-none">FEMA Flood Zones (ft.) ref. NAVD88:  <span class="text-secondary text-weight-regular"></span></p>
-                    <p class="text-blue-grey-9 text-bold q-mb-none">Base Flood Elevation (ft.) ref. NAVD88: <span class="text-secondary text-weight-regular"></span></p>
-                    <p class="text-blue-grey-9 text-bold q-mb-none">Low to Moderate Income Percentage (within block group): <span class="text-secondary text-weight-regular"></span></p>
-                    <p class="text-blue-grey-9 text-bold q-mb-none">Coastal Jurisdiction Line: (ft.) ref. NAVD88: <span class="text-secondary text-weight-regular"></span></p>
-                    <p class="text-blue-grey-9 text-bold q-mb-none">Watershed (HUC-12):  <span class="text-secondary text-weight-regular"></span></p>
-                    <p class="text-blue-grey-9 text-bold q-mb-none">County: <span class="text-secondary text-weight-regular"></span></p>
+                    <p class="text-blue-grey-9 text-bold q-mb-none">Project Name: <span class="text-weight-regular" style="color:#2F6384">{{ projectStore.infoData.Project_Name }}</span></p> 
+                    <p class="text-blue-grey-9 text-bold q-mb-none">Primary Asset Exposed: <span class="text-weight-regular" style="color:#2F6384">{{ projectStore.infoData.Risk_Reduction_Prim }}</span></p>
+                    <p class="text-blue-grey-9 text-bold q-mb-none">Secondary Asset Exposed: <span class="text-weight-regular" style="color:#2F6384">{{ projectStore.infoData.Risk_Reduction_Sec }}</span></p>
+                    <p class="text-blue-grey-9 text-bold q-mb-none">FEMA Flood Zones (ft.) ref. NAVD88:  <span class="text-weight-regular" style="color:#2F6384">{{ projectStore.infoData.FLD_Zone }}</span></p>
+                    <p class="text-blue-grey-9 text-bold q-mb-none">Base Flood Elevation (ft.) ref. NAVD88: <span class="text-weight-regular" style="color:#2F6384">{{ projectStore.infoData.BFELEV }}</span></p>
+                    <p class="text-blue-grey-9 text-bold q-mb-none">Low to Moderate Income Percentage (within block group): <span class="text-weight-regular" style="color:#2F6384">{{ projectStore.infoData.LMI }}</span></p>
+                    <p class="text-blue-grey-9 text-bold q-mb-none">Coastal Jurisdiction Line: (ft.) ref. NAVD88: <span class="text-weight-regular" style="color:#2F6384">{{ projectStore.infoData.CJL_No }}</span></p>
+                    <p class="text-blue-grey-9 text-bold q-mb-none">Watershed (HUC-12):  <span class="text-weight-regular" style="color:#2F6384">{{ projectStore.infoData.Watershed_HUC12 }}</span></p>
+                    <p class="text-blue-grey-9 text-bold q-mb-none">County: <span class="text-weight-regular" style="color:#2F6384">{{ projectStore.infoData.County }}</span></p>
                 </div>
             </q-tab-panel>
             <q-tab-panel name="info">
                  <div class="q-pa-sm">
-                    <p class="text-blue-grey-9 text-bold q-mb-none">Project Name: <span class="text-secondary text-weight-regular"></span></p> 
-                    <p class="text-blue-grey-9 text-bold q-mb-none">Sources - References: <span class="text-secondary text-weight-regular"></span></p>
-                    <p class="text-blue-grey-9 text-bold q-mb-none">Photos: <span class="text-secondary text-weight-regular"></span></p>
+                    <p class="text-blue-grey-9 text-bold q-mb-none">Project Name: <span class="text-weight-regular" style="color:#2F6384">{{ projectStore.infoData.Project_Name }}</span></p> 
+                    <p class="text-blue-grey-9 text-bold q-mb-none">Sources - References: <span class="text-weight-regular" style="color:#2F6384"><a :href="projectStore.infoData.Plan_of_Ref_">Link to reference</a></span></p>
+                    <p class="text-blue-grey-9 text-bold q-mb-none">Photos: <span class="text-weight-regular" style="color:#2F6384"></span></p>
                  </div>
             </q-tab-panel>
         </q-tab-panels>
