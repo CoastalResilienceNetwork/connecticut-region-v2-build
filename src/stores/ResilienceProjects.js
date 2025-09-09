@@ -4,12 +4,10 @@ import { ref } from 'vue';
 
 export const useProjectsStore = defineStore('projectsStore', () => {
   const symbolizeBy = ref('all');
-  const whereAttribute = ref('');
-  const whereValue = ref('');
   const infoTab ='overview';
   const infoData = ''
+  const defExp = [{whereAttribute: '', whereValue: '', operation: ''}]
   function whereValueOptions(whereAttribute) {
-    console.log(whereAttribute)
     const optionsLookup = {
       type: [
         { label: "Coastal Natural Infrastructure", value: "Coastal Natural Infrastructure" },
@@ -47,14 +45,40 @@ export const useProjectsStore = defineStore('projectsStore', () => {
     };
     return whereAttribute.value === '' ? [] : optionsLookup[whereAttribute.value];
   };
-  const defExp = [{whereAttribute: '', whereValue: '', operation: ''}]
+  function defQuery(){
+    let def = ''
+    if (defExp[0].whereAttribute == '' || defExp[0].whereValue == '' ){
+      def= '1=1'
+
+    }
+    else{
+      for (let i=0; i < defExp.length; i++){
+        console.log(defExp[i])
+        if(defExp[i].whereAttribute && defExp[i].whereValue){
+        def = def + "(" + defExp[i].whereAttribute.field + '=' + "'" + defExp[i].whereValue.value + "'" + ")"
+        if(defExp[i].operation){
+          def = def + " " + defExp[i].operation
+        }
+      }
+      }
+   }
+    console.log(def)
+    applyDef(def)
+  };
+  function applyDef(def){
+
+    let map = document.querySelector("arcgis-map").map;
+    let layer = map.findLayerById('projects');
+    layer.sublayers.forEach(sl => sl.definitionExpression = def)
+    
+}
   return {
+    defQuery,
     symbolizeBy,
-    whereAttribute,
-    whereValue,
     whereValueOptions,
     defExp,
     infoTab,
-    infoData
+    infoData,
+    
   };
 });

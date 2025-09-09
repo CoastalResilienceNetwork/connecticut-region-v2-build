@@ -1,8 +1,16 @@
 <script setup>
 import { useProjectsStore } from '@/stores/ResilienceProjects'
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 const projectStore = useProjectsStore()
+const imageDialogVisible = ref(false)
+const imgSrc= ''
+//const currentImageSrc = ref('')
 
+/*function showFullImage(imageUrl) {
+  if (!imageUrl) return
+  currentImageSrc.value = imageUrl
+  imageDialogVisible.value = true
+}*/
 
 onMounted(() => {
     let map = document.querySelector("arcgis-map").map;
@@ -10,6 +18,11 @@ onMounted(() => {
     let sub = layer.findSublayerById(0);
     sub.visible = true
 })
+
+function showFullImage(attachmentInfo) {
+  imageDialogVisible.value = true
+  this.imgSrc = attachmentInfo.url;
+}
 
 function setVisibleLayer(){
     let vals = {all: 0, type: 1, objective: 2, strategy:3, town: 4}
@@ -59,11 +72,12 @@ function setVisibleLayer(){
             :label="exp.whereAttribute ? null : 'Pick a field'"
             v-model="exp.whereAttribute"
             :options="[
-              { label: 'Type', value: 'type' },
-              { label: 'Objective', value: 'objective' },
-              { label: 'Strategy', value: 'strategy' },
-              { label: 'Town', value: 'town' },
+              { label: 'Type', value: 'type', field: 'Primary_Cat' },
+              { label: 'Objective', value: 'objective', field: 'Secondary_Cat' },
+              { label: 'Strategy', value: 'strategy', field: 'Action_' },
+              { label: 'Town', value: 'town', field: 'Town' },
             ]"
+             @update:model-value="exp.whereAttribute ? null : projectStore.defQuery"
           ></q-select>
         </div>
         <div  v-if="exp.whereAttribute" class="col-1 self-center">
@@ -79,6 +93,7 @@ function setVisibleLayer(){
             v-model="exp.whereValue"
             :options="projectStore.whereValueOptions(exp.whereAttribute)"
             clearable
+            @update:model-value="projectStore.defQuery()"
           ></q-select>
         </div>
         <div class="col-12 q-mt-sm" v-if="exp.whereValue">
@@ -137,8 +152,11 @@ function setVisibleLayer(){
             <q-tab-panel name="info">
                  <div class="q-pa-sm">
                     <p class="text-blue-grey-9 text-bold q-mb-none">Project Name: <span class="text-weight-regular" style="color:#2F6384">{{ projectStore.infoData.Project_Name }}</span></p> 
-                    <p class="text-blue-grey-9 text-bold q-mb-none">Sources - References: <span class="text-weight-regular" style="color:#2F6384"><a :href="projectStore.infoData.Plan_of_Ref_">Link to reference</a></span></p>
-                    <p class="text-blue-grey-9 text-bold q-mb-none">Photos: <span class="text-weight-regular" style="color:#2F6384"></span></p>
+                    <p class="text-blue-grey-9 text-bold q-mb-none">Sources - References: <span class="text-weight-regular" style="color:#2F6384"><a target="_blank" :href="projectStore.infoData.Plan_of_Ref_">Link to reference</a></span></p>
+                    <p class="text-blue-grey-9 text-bold q-mb-none">Photos: <span class="text-weight-regular" style="color:#2F6384">
+                      <q-btn size="sm" color="secondary" flat v-for="photo, index in projectStore.infoData.attachments" :key="index" @click="showFullImage(photo)">photo{{index + 1}}</q-btn> 
+                     
+                    </span></p>
                  </div>
             </q-tab-panel>
         </q-tab-panels>
@@ -147,6 +165,14 @@ function setVisibleLayer(){
       <q-btn outline size="12px" icon="img:/img/pdf.svg" label="Strategy Definitions" color="secondary" stack class="q-mr-xs"></q-btn>
       <q-btn outline size="12px" icon="img:/img/pdf.svg" label="Project Type Definitions" color="secondary" stack></q-btn>
     </div>
+      <q-dialog v-model="imageDialogVisible" full-width>
+    <q-card>
+      <q-img :src="imgSrc" style="max-height: 80vh; max-width: 100vw"></q-img>
+      <q-card-actions align="right">
+        <q-btn flat label="Close" color="primary" @click="imageDialogVisible = false" />
+      </q-card-actions>
+    </q-card>
+  </q-dialog>
   </q-scroll-area>
 </template>
 <style>

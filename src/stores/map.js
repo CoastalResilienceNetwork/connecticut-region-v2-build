@@ -3,6 +3,7 @@ import { defineStore } from 'pinia';
 import * as identify from '@arcgis/core/rest/identify.js';
 import IdentifyParameters from '@arcgis/core/rest/support/IdentifyParameters.js';
 import { useProjectsStore } from './ResilienceProjects';
+import { markRaw } from 'vue';
 
 export const useMapStore = defineStore('mapStore', () => ({
   
@@ -30,11 +31,11 @@ export const useMapStore = defineStore('mapStore', () => ({
         layer.queryAttachments({objectIds: [objectId]}).then((attachments) => {
           
         if (attachments[objectId] && attachments[objectId].length > 0) {
-        console.log(`Feature ${objectId} has attachments:`, attachments[objectId]);
-      } else {
-        console.log(`Feature ${objectId} has no attachments.`);
-      }
-
+          markRaw(projectsStore.infoData.attachments = attachments[objectId])
+          console.log(`Feature ${objectId} has attachments:`, attachments[objectId]);
+        } else {
+          console.log(`Feature ${objectId} has no attachments.`);
+        }
         });
       })
   }
