@@ -2,6 +2,7 @@
 import MapImageLayer from '@arcgis/core/layers/MapImageLayer'
 import FeatureLayer from '@arcgis/core/layers/FeatureLayer'
 import Map from '@arcgis/core/Map'
+import GraphicsLayer from "@arcgis/core/layers/GraphicsLayer.js";
 import { useMapStore } from '@/stores/map'
 import { onMounted } from 'vue'
 
@@ -9,10 +10,12 @@ import { onMounted } from 'vue'
 onMounted(() => {
   console.log('Map is ready')
   const arcgisMap = document.querySelector('arcgis-map')
-
+  const graphicsLayer = new GraphicsLayer({
+   id: 'graphicsLayer'
+  });
   let projects = new MapImageLayer({
     url: 'https://services2.coastalresilience.org/arcgis/rest/services/Connecticut/Regional_Resilience_Projects/MapServer',
-    title: 'Regional Resilience Projects',
+    title: '',
     id: 'projects',
     sublayers: [{id: 0, visible: false, definitionExpression: '1=1'}, {id: 1, visible: false, definitionExpression: '1=1'}, {id: 2, visible: false, definitionExpression: '1=1'}, {id: 3, visible: false, definitionExpression: '1=1'}, {id: 4, visible: false, definitionExpression: '1=1'}],
   })
@@ -23,7 +26,7 @@ onMounted(() => {
   })
   arcgisMap.map = new Map({
     basemap: 'topo',
-    layers: [projects, attachments],
+    layers: [projects, attachments, graphicsLayer],
   })
 
    arcgisMap.addEventListener("arcgisViewReadyChange", (event) => {
@@ -43,6 +46,7 @@ onMounted(() => {
     center=" -72.53795820793547,  41.10615832681711"
     zoom="8"
   >
+   <arcgis-legend position="bottom-right" legend-style="card"></arcgis-legend>
   </arcgis-map>
 </template>
 
@@ -62,4 +66,9 @@ onMounted(() => {
 }
 
 .esri-popup .sizer { width: 500px !important; }
+
+.esri-legend--card__layer-caption{
+  margin-bottom: 0px !important;
+  padding: 0px !important;
+}
 </style>
