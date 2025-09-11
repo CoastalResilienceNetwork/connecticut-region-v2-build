@@ -36,8 +36,8 @@ export const useMapStore = defineStore('mapStore', () => ({
         // Create a point graphic
         const pointSymbol = new SimpleMarkerSymbol({
           outline: {
-            color: 'yellow',
-            width: 1,
+            color: 'blue',
+            width: 2,
           },
         });
 

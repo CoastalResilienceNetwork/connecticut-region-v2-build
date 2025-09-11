@@ -14,9 +14,15 @@ const imgSrc= ''
 
 onMounted(() => {
     let map = document.querySelector("arcgis-map").map;
+    map.layers.forEach(function(layer) {
+      layer.visible = false;
+    });
     let layer = map.findLayerById('projects');
+    layer.visible = true
     let sub = layer.findSublayerById(0);
     sub.visible = true
+    let gLayer = map.findLayerById('graphicsLayer');
+    gLayer.visible = true
 })
 
 function showFullImage(attachmentInfo) {

@@ -22,6 +22,7 @@ const getWidth = computed(() => {
     cPlanning: 300,
     futurehab: 300,
     risk: 300,
+    fslr: 350
   }
 
   return 'max-width:' + pixelWidths[route.name] + 'px'

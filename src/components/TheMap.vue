@@ -1,6 +1,7 @@
 <script setup>
 import MapImageLayer from '@arcgis/core/layers/MapImageLayer'
 import FeatureLayer from '@arcgis/core/layers/FeatureLayer'
+import TileLayer from '@arcgis/core/layers/TileLayer'
 import Map from '@arcgis/core/Map'
 import GraphicsLayer from "@arcgis/core/layers/GraphicsLayer.js";
 import { useMapStore } from '@/stores/map'
@@ -8,6 +9,7 @@ import { onMounted } from 'vue'
 
 
 onMounted(() => {
+
   console.log('Map is ready')
   const arcgisMap = document.querySelector('arcgis-map')
   const graphicsLayer = new GraphicsLayer({
@@ -24,12 +26,65 @@ onMounted(() => {
     id: 'attachments',
     visible: false
   })
-  arcgisMap.map = new Map({
-    basemap: 'topo',
-    layers: [projects, attachments, graphicsLayer],
+  let floodSeaLevelRise = new MapImageLayer({
+    url: 'https://services2.coastalresilience.org/arcgis/rest/services/Connecticut/Flood_SLR/MapServer',
+    title: 'Flood and Sea Level Rise',
+    id: 'floodSeaLevelRise',
+    sublayers: [
+     { id: 0, visible: false, opacity: 1.0}, { id: 1, visible: false, title: 'Connecticut - 2080 - Med - Category 2' }, { id: 2, visible: false, opacity: 1.0},
+      { id: 3, visible: false, opacity: 1.0}, { id: 4, visible: false, title: 'Connecticut - 2050 - Med - Category 2' }, { id: 5, visible: false, opacity: 1.0},
+      { id: 6, visible: false, opacity: 1.0}, { id: 7, visible: false, title:'Connecticut - 2020 - Med - Category 2 ' }, { id: 8, visible: false, opacity: 1.0},
+      { id: 9, visible: false, opacity: 1.0}, { id: 10, visible: false, title: 'Connecticut - 2080 - Med - Category 3' }, { id: 11, visible: false, opacity: 1.0},
+      { id: 12, visible: false, opacity: 1.0}, { id: 13, visible: false, title: 'Connecticut - 2050 - Med - Category 3' }, { id: 14, visible: false, opacity: 1.0},
+      { id: 15, visible: false, opacity: 1.0}, { id: 16, visible: false, title: 'Connecticut - 2020 - Med - Category 3' }, { id: 17, visible: false, opacity: 1.0},
+      { id: 18, visible: false, opacity: 1.0}, { id: 19, visible: false, title: 'Connecticut - 2080 - Med - No Storm' }, { id: 20, visible: false, opacity: 1.0},
+      { id: 21, visible: false, opacity: 1.0}, { id: 22, visible: false, title: 'Connecticut - 2050 - Med - No Storm' }, { id: 23, visible: false, opacity: 1.0},
+      { id: 24, visible: false, opacity: 1.0}, { id: 25, visible: false, title: 'Connecticut - 2020 - Med - No Storm' }, { id: 26, visible: false, opacity: 1.0},
+      { id: 27, visible: false, opacity: 1.0}, { id: 28, visible: false, opacity: 1.0}
+    ],
+  })  
+  let noaa0 = new TileLayer({
+    url: 'https://maps1.coast.noaa.gov/arcgis/rest/services/dc_slr/slr_0ft/MapServer',
+    visible: false,
+    id: 'noaa0'
+  })
+  let noaa1 = new TileLayer({
+    url: 'https://maps1.coast.noaa.gov/arcgis/rest/services/dc_slr/slr_1ft/MapServer',
+    visible: false,
+    id: 'noaa1'
+  })
+  let noaa2 = new TileLayer({
+    url: 'https://maps1.coast.noaa.gov/arcgis/rest/services/dc_slr/slr_2ft/MapServer',
+    visible: false,
+    id: 'noaa2'
+  })
+  let noaa3 = new TileLayer({
+    url: 'https://maps1.coast.noaa.gov/arcgis/rest/services/dc_slr/slr_3ft/MapServer',
+    visible: false,
+    id: 'noaa3'
+  })
+  let noaa4 = new TileLayer({
+    url: 'https://maps1.coast.noaa.gov/arcgis/rest/services/dc_slr/slr_4ft/MapServer',
+    visible: false,
+    id: 'noaa4'
+  })
+  let noaa5 = new TileLayer({
+    url: 'https://maps1.coast.noaa.gov/arcgis/rest/services/dc_slr/slr_5ft/MapServer',
+    visible: false,
+    id: 'noaa5'
+  })
+  let noaa6 = new TileLayer({
+    url: 'https://maps1.coast.noaa.gov/arcgis/rest/services/dc_slr/slr_6ft/MapServer',
+    visible: false,
+    id: 'noaa6'
   })
 
-   arcgisMap.addEventListener("arcgisViewReadyChange", (event) => {
+  arcgisMap.map = new Map({
+    basemap: 'topo',
+    layers: [projects, attachments, graphicsLayer, floodSeaLevelRise, noaa0, noaa1, noaa2, noaa3, noaa4, noaa5, noaa6],
+  })
+
+  arcgisMap.addEventListener("arcgisViewReadyChange", (event) => {
     const { view } = event.target;
     const mapStore = useMapStore()
     view.on("click", (event) => {
@@ -46,7 +101,7 @@ onMounted(() => {
     center=" -72.53795820793547,  41.10615832681711"
     zoom="8"
   >
-   <arcgis-legend position="bottom-right" legend-style="card"></arcgis-legend>
+   <arcgis-legend position="bottom-right" ></arcgis-legend>
   </arcgis-map>
 </template>
 
@@ -70,5 +125,6 @@ onMounted(() => {
 .esri-legend--card__layer-caption{
   margin-bottom: 0px !important;
   padding: 0px !important;
+  margin-top: 0px !important;
 }
 </style>
