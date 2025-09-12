@@ -12,6 +12,7 @@ onMounted(() => {
 
   console.log('Map is ready')
   const arcgisMap = document.querySelector('arcgis-map')
+  //Resilient Projects tab
   const graphicsLayer = new GraphicsLayer({
    id: 'graphicsLayer'
   });
@@ -26,6 +27,14 @@ onMounted(() => {
     id: 'attachments',
     visible: false
   })
+  //Regional Planning, Community Planning & Future Habitat tabs
+  let connecticut = new MapImageLayer({
+    url: 'https://services2.coastalresilience.org/arcgis/rest/services/Connecticut/Connecticut/MapServer',
+    title: 'Connecticut',
+    id: 'connecticut',
+  })
+
+  //Flood and Sea Level Rise tab
   let floodSeaLevelRise = new MapImageLayer({
     url: 'https://services2.coastalresilience.org/arcgis/rest/services/Connecticut/Flood_SLR/MapServer',
     title: 'Flood and Sea Level Rise',
@@ -81,7 +90,7 @@ onMounted(() => {
 
   arcgisMap.map = new Map({
     basemap: 'topo',
-    layers: [projects, attachments, graphicsLayer, floodSeaLevelRise, noaa0, noaa1, noaa2, noaa3, noaa4, noaa5, noaa6],
+    layers: [projects, attachments, graphicsLayer, floodSeaLevelRise, noaa0, noaa1, noaa2, noaa3, noaa4, noaa5, noaa6, connecticut],
   })
 
   arcgisMap.addEventListener("arcgisViewReadyChange", (event) => {
