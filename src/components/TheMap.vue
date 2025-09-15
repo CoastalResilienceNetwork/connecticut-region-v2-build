@@ -110,7 +110,12 @@ onMounted(() => {
     center=" -72.53795820793547,  41.10615832681711"
     zoom="8"
   >
-   <arcgis-legend position="bottom-right" ></arcgis-legend>
+   <arcgis-legend position="bottom-right" legend-style="classic" ></arcgis-legend>
+   <arcgis-basemap-toggle position="top-right" :next-basemap="'satellite'"></arcgis-basemap-toggle>
+   <div style="position: absolute; top: 100px; right: 15px; z-index: 10;">
+    <q-btn icon="layers" square :ripple="false" class="bg-white text-primary" label="clear all" size="12px" />
+   </div>
+   
   </arcgis-map>
 </template>
 
@@ -131,9 +136,6 @@ onMounted(() => {
 
 .esri-popup .sizer { width: 500px !important; }
 
-.esri-legend--card__layer-caption{
-  margin-bottom: 0px !important;
-  padding: 0px !important;
-  margin-top: 0px !important;
-}
+
+
 </style>

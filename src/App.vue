@@ -2,7 +2,7 @@
 //import esri component libs globally so they are available in multiple components
 import '@arcgis/map-components/components/arcgis-map'
 import '@arcgis/map-components/components/arcgis-legend'
-import '@arcgis/map-components/components/arcgis-basemap-gallery'
+import "@arcgis/map-components/components/arcgis-basemap-toggle";
 import '@arcgis/map-components/components/arcgis-layer-list'
 import '@arcgis/map-components/components/arcgis-search'
 import { ref, computed } from 'vue'
