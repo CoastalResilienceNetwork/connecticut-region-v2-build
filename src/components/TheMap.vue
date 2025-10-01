@@ -33,7 +33,15 @@ onMounted(() => {
     title: 'Connecticut',
     id: 'connecticut',
   })
-
+  //Risk explorer tab
+  let riskExplorer = new MapImageLayer({
+    url: 'https://services2.coastalresilience.org/arcgis/rest/services/Connecticut/Risk_Explorer_CT/MapServer',
+    title: 'Risk Explorer',
+    id: 'riskExplorer',
+    sublayers: [
+     { id: 0, visible: false, opacity: 1.0},
+    ],
+  })  
   //Flood and Sea Level Rise tab
   let floodSeaLevelRise = new MapImageLayer({
     url: 'https://services2.coastalresilience.org/arcgis/rest/services/Connecticut/Flood_SLR/MapServer',
@@ -88,9 +96,10 @@ onMounted(() => {
     id: 'noaa6'
   })
 
+  
   arcgisMap.map = new Map({
     basemap: 'topo',
-    layers: [projects, attachments, graphicsLayer, floodSeaLevelRise, noaa0, noaa1, noaa2, noaa3, noaa4, noaa5, noaa6, connecticut],
+    layers: [projects, attachments, graphicsLayer, floodSeaLevelRise, noaa0, noaa1, noaa2, noaa3, noaa4, noaa5, noaa6, connecticut, riskExplorer],
   })
 
   arcgisMap.addEventListener("arcgisViewReadyChange", (event) => {

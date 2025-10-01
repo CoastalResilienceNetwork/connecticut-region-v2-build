@@ -17,6 +17,24 @@
     </p>
 
     <p class="text-body2 text-bold">Start exploring</p>
+
+       <q-item class="q-ml-none q-pl-none">
+        <q-item-section top avatar class="q-pl-none q-ml-none">
+          <q-img src="img/getStarted_flood_slr.png"></q-img>
+        </q-item-section>
+
+        <q-item-section>
+          <q-item-label class="accent text-bold">Flood and Sea Level Rise</q-item-label>
+        </q-item-section>
+
+        <q-item-section side>
+          <q-btn color="primary" to="/sea-level-rise" outline size="sm" square>Go</q-btn>
+        </q-item-section>
+      </q-item>
+      <p class="text-caption q-ml-xs">
+        Identifies potential inundation during coastal storms from wind, storm surge, and future
+        flood risk based on sea-level rise predictions.
+      </p>
    
       <q-item class="q-ml-none q-pl-none">
         <q-item-section top avatar class="q-pl-none q-ml-none">
@@ -39,16 +57,15 @@
         </q-item-section>
 
         <q-item-section>
-          <q-item-label class="accent text-bold">Flood and Sea Level Rise</q-item-label>
+          <q-item-label class="accent text-bold">Regional Planning</q-item-label>
         </q-item-section>
 
         <q-item-section side>
-          <q-btn color="primary" to="/sea-level-rise" outline size="sm" square>Go</q-btn>
+          <q-btn color="primary" outline to="regional-planning" size="sm" square>Go</q-btn>
         </q-item-section>
       </q-item>
       <p class="text-caption q-ml-xs">
-        Identifies potential inundation during coastal storms from wind, storm surge, and future
-        flood risk based on sea-level rise predictions.
+        Regional and state based data layers to inform resilience planning.
       </p>
      
       <q-item class="q-ml-none q-pl-none">
@@ -69,22 +86,7 @@
         response to future projected sea level rise scenarios.
       </p>
      
-      <q-item class="q-ml-none q-pl-none">
-        <q-item-section top avatar class="q-pl-none q-ml-none">
-          <q-img src="img/getStarted_flood_slr.png"></q-img>
-        </q-item-section>
-
-        <q-item-section>
-          <q-item-label class="accent text-bold">Regional Planning</q-item-label>
-        </q-item-section>
-
-        <q-item-section side>
-          <q-btn color="primary" outline to="regional-planning" size="sm" square>Go</q-btn>
-        </q-item-section>
-      </q-item>
-      <p class="text-caption q-ml-xs">
-        Regional and state based data layers to inform resilience planning.
-      </p>
+   
 
   </q-scroll-area>
   </div>

@@ -21,7 +21,7 @@ const getWidth = computed(() => {
     rPlanning: 300,
     cPlanning: 300,
     futurehab: 300,
-    risk: 300,
+    risk: 350,
     fslr: 350
   }
 
@@ -115,6 +115,44 @@ const getWidth = computed(() => {
               </q-item-section>
             </q-item>
           </q-route-tab>
+                <q-route-tab
+            :ripple="false"
+            class="border text-caption text-bold"
+            name="fslr"
+            to="/sea-level-rise"
+          ><q-tooltip v-if="!navState">Flood & Sea Level Rise</q-tooltip>
+            <q-item class="q-pa-none">
+              <q-item-section class="" avatar>
+                <q-img src="img/fslr_icon_sm.png"></q-img>
+              </q-item-section>
+
+              <q-item-section v-if="navState">
+                <q-item-label class="text-left"
+                  >Flood &<br />
+                  Sea Level Rise</q-item-label
+                >
+              </q-item-section>
+            </q-item>
+          </q-route-tab>
+           <q-route-tab
+            :ripple="false"
+            class="border text-caption text-bold"
+            name="futureHab"
+            to="/future-habitat"
+          ><q-tooltip v-if="!navState">Future Habitat</q-tooltip>
+            <q-item class="q-pa-none">
+              <q-item-section class="" avatar>
+                <q-img src="img/futhab_icon_sm.png"></q-img>
+              </q-item-section>
+
+              <q-item-section v-if="navState">
+                <q-item-label class="text-left"
+                  >Future<br />
+                  Habitat</q-item-label
+                >
+              </q-item-section>
+            </q-item>
+          </q-route-tab>
           <q-route-tab
             :ripple="false"
             class="border text-caption text-bold"
@@ -173,44 +211,8 @@ const getWidth = computed(() => {
               </q-item-section>
             </q-item>
           </q-route-tab>
-          <q-route-tab
-            :ripple="false"
-            class="border text-caption text-bold"
-            name="futureHab"
-            to="/future-habitat"
-          ><q-tooltip v-if="!navState">Future Habitat</q-tooltip>
-            <q-item class="q-pa-none">
-              <q-item-section class="" avatar>
-                <q-img src="img/futhab_icon_sm.png"></q-img>
-              </q-item-section>
-
-              <q-item-section v-if="navState">
-                <q-item-label class="text-left"
-                  >Future<br />
-                  Habitat</q-item-label
-                >
-              </q-item-section>
-            </q-item>
-          </q-route-tab>
-          <q-route-tab
-            :ripple="false"
-            class="border text-caption text-bold"
-            name="fslr"
-            to="/sea-level-rise"
-          ><q-tooltip v-if="!navState">Flood & Sea Level Rise</q-tooltip>
-            <q-item class="q-pa-none">
-              <q-item-section class="" avatar>
-                <q-img src="img/fslr_icon_sm.png"></q-img>
-              </q-item-section>
-
-              <q-item-section v-if="navState">
-                <q-item-label class="text-left"
-                  >Flood &<br />
-                  Sea Level Rise</q-item-label
-                >
-              </q-item-section>
-            </q-item>
-          </q-route-tab>
+         
+    
           <q-route-tab
             :ripple="false"
             class="border text-caption text-bold"
