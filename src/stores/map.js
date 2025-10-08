@@ -5,7 +5,7 @@ import IdentifyParameters from '@arcgis/core/rest/support/IdentifyParameters.js'
 import { useProjectsStore } from './ResilienceProjects';
 import { markRaw } from 'vue';
 import Graphic from "@arcgis/core/Graphic.js";
-import SimpleMarkerSymbol from "@arcgis/core/symbols/SimpleMarkerSymbol.js";
+
 
 export const useMapStore = defineStore('mapStore', () => ({
   
@@ -62,7 +62,7 @@ export const useMapStore = defineStore('mapStore', () => ({
         }
         });
       })
-  }
-
+  },
+  
 }
 ));
