@@ -1,5 +1,7 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onActivated } from 'vue'
+import { useMapStore } from '@/stores/map'
+const mapStore = useMapStore()
 
 const hazard = ref({
   label: 'Sea Level Rise (Coastal Resilience)',
@@ -12,13 +14,10 @@ const seaLevelFt = ref('0')
 const opacity = ref(1.0)
 const opacityVisible = ref(false)
 
-onMounted(() => {
-  //turn off all layers
-    let map = document.querySelector("arcgis-map").map;
-    map.layers.forEach(function(layer) {
-      layer.visible = false;
-    });   
-  let layer = map.findLayerById('floodSeaLevelRise');
+onActivated(() => {
+  mapStore.clearAppLayers()
+  let map = document.querySelector('arcgis-map').map
+  let layer = map.findLayerById('floodSeaLevelRise')
   layer.visible = true
 })
 
@@ -81,7 +80,7 @@ function setOpacity() {
   let map = document.querySelector('arcgis-map').map
   let layer = map.findLayerById('floodSeaLevelRise')
   layer.opacity = opacity.value
-    let slrLayers = ['noaa0', 'noaa1', 'noaa2', 'noaa3', 'noaa4', 'noaa5', 'noaa6']
+  let slrLayers = ['noaa0', 'noaa1', 'noaa2', 'noaa3', 'noaa4', 'noaa5', 'noaa6']
   slrLayers.forEach((id) => {
     let l = map.findLayerById(id)
     l.opacity = opacity.value

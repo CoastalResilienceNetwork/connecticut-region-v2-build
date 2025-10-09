@@ -8,7 +8,6 @@ import Graphic from "@arcgis/core/Graphic.js";
 
 
 export const useMapStore = defineStore('mapStore', () => ({
-  
   executeIdentify(mapPoint){
     const projectsStore = useProjectsStore()
     const arcgisMap = document.querySelector('arcgis-map') 
@@ -63,6 +62,29 @@ export const useMapStore = defineStore('mapStore', () => ({
         });
       })
   },
+  clearAppLayers(){
+      let map = document.querySelector("arcgis-map").map;
+      map.findLayerById('graphicsLayer').visible = false
+      map.findLayerById('riskExplorerGraphics').visible = false
+      map.findLayerById('projects').visible = false
+      map.findLayerById('riskExplorer').visible = false
+      map.findLayerById('riskExplorerFeatures').visible = false
+      map.findLayerById('floodSeaLevelRise').visible = false
+      map.findLayerById('noaa0').visible = false
+      map.findLayerById('noaa1').visible = false
+      map.findLayerById('noaa2').visible = false
+      map.findLayerById('noaa3').visible = false
+      map.findLayerById('noaa4').visible = false
+      map.findLayerById('noaa5').visible = false
+      map.findLayerById('noaa6').visible = false
+  },
+  clearOtherLayers(){
+    let map = document.querySelector("arcgis-map").map;
+    let mapservice = map.findLayerById('connecticut')
+    mapservice.sublayers.forEach((layer) => {
+      layer.visible = false;
+    });
+  }
   
 }
 ));

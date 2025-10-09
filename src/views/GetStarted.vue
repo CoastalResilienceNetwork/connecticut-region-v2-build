@@ -85,7 +85,9 @@
         Shows how the size and distribution of salt marshes and other coastal habitats may change in
         response to future projected sea level rise scenarios.
       </p>
-     
+     <div class="q-pa-md text-center">
+      <q-img src="/img/tncLogo.png" style="width:175px"></q-img>
+     </div>
    
 
   </q-scroll-area>

@@ -8,7 +8,9 @@ import Graphic from '@arcgis/core/Graphic'
 import { useMapStore } from '@/stores/map'
 import { useRiskStore } from '@/stores/RiskExplorer'
 import { onMounted } from 'vue'
-
+import { useRoute } from 'vue-router'
+const route = useRoute()
+const mapStore=useMapStore()
 onMounted(() => {
   console.log('Map is ready')
   const arcgisMap = document.querySelector('arcgis-map')
@@ -18,6 +20,7 @@ onMounted(() => {
   //Resilient Projects tab
   const graphicsLayer = new GraphicsLayer({
     id: 'graphicsLayer',
+    
   })
   const riskExplorerGraphics = new GraphicsLayer({
     id: 'riskExplorerGraphics',
@@ -283,7 +286,7 @@ onMounted(() => {
     center=" -72.53795820793547,  41.10615832681711"
     zoom="8"
   >
-    <arcgis-legend position="bottom-right" legend-style="classic"></arcgis-legend>
+    <arcgis-legend v-if="route.name !=='risk'" position="bottom-right" legend-style="classic"></arcgis-legend>
     <arcgis-basemap-toggle position="top-right" :next-basemap="'satellite'"></arcgis-basemap-toggle>
     <div style="position: absolute; top: 100px; right: 15px; z-index: 10">
       <q-btn
@@ -291,8 +294,9 @@ onMounted(() => {
         square
         :ripple="false"
         class="bg-white text-primary"
-        label="clear all"
+        label="clear"
         size="12px"
+        @click="mapStore.clearOtherLayers()"
       />
     </div>
   </arcgis-map>

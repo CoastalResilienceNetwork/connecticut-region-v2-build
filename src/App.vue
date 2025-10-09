@@ -2,13 +2,15 @@
 //import esri component libs globally so they are available in multiple components
 import '@arcgis/map-components/components/arcgis-map'
 import '@arcgis/map-components/components/arcgis-legend'
-import "@arcgis/map-components/components/arcgis-basemap-toggle";
+import '@arcgis/map-components/components/arcgis-basemap-toggle'
 import '@arcgis/map-components/components/arcgis-layer-list'
 import '@arcgis/map-components/components/arcgis-search'
 import { ref, computed } from 'vue'
 import TheMap from './components/TheMap.vue'
+import { useMapStore } from './stores/map.js'
 import { useRoute } from 'vue-router'
 
+const mapStore = useMapStore()
 const route = useRoute()
 const navState = ref(true)
 const getNavWidth = computed(() => {
@@ -22,7 +24,7 @@ const getWidth = computed(() => {
     cPlanning: 300,
     futurehab: 300,
     risk: 350,
-    fslr: 350
+    fslr: 350,
   }
 
   return 'max-width:' + pixelWidths[route.name] + 'px'
@@ -101,9 +103,9 @@ const getWidth = computed(() => {
             class="border text-caption text-bold"
             name="start"
             to="/start"
-          ><q-tooltip v-if="!navState">Get Started</q-tooltip>
+            ><q-tooltip v-if="!navState">Get Started</q-tooltip>
             <q-item class="q-pa-none">
-              <q-item-section class="" avatar >
+              <q-item-section class="" avatar>
                 <q-icon name="home" size="40px"></q-icon>
               </q-item-section>
 
@@ -115,12 +117,12 @@ const getWidth = computed(() => {
               </q-item-section>
             </q-item>
           </q-route-tab>
-                <q-route-tab
+          <q-route-tab
             :ripple="false"
             class="border text-caption text-bold"
             name="fslr"
             to="/sea-level-rise"
-          ><q-tooltip v-if="!navState">Flood & Sea Level Rise</q-tooltip>
+            ><q-tooltip v-if="!navState">Flood & Sea Level Rise</q-tooltip>
             <q-item class="q-pa-none">
               <q-item-section class="" avatar>
                 <q-img src="img/fslr_icon_sm.png"></q-img>
@@ -134,12 +136,12 @@ const getWidth = computed(() => {
               </q-item-section>
             </q-item>
           </q-route-tab>
-           <q-route-tab
+          <q-route-tab
             :ripple="false"
             class="border text-caption text-bold"
             name="futureHab"
             to="/future-habitat"
-          ><q-tooltip v-if="!navState">Future Habitat</q-tooltip>
+            ><q-tooltip v-if="!navState">Future Habitat</q-tooltip>
             <q-item class="q-pa-none">
               <q-item-section class="" avatar>
                 <q-img src="img/futhab_icon_sm.png"></q-img>
@@ -158,11 +160,11 @@ const getWidth = computed(() => {
             class="border text-caption text-bold"
             name="projects"
             to="/projects"
-          ><q-tooltip v-if="!navState">Regional Resilience Projects</q-tooltip>
-           
+            ><q-tooltip v-if="!navState">Regional Resilience Projects</q-tooltip>
+
             <q-item class="q-pa-none">
-              <q-item-section class="" avatar >
-                <q-img class="bg-white" src="img/projects_icon_sm.png" ></q-img>
+              <q-item-section class="" avatar>
+                <q-img class="bg-white" src="img/projects_icon_sm.png"></q-img>
               </q-item-section>
 
               <q-item-section v-if="navState">
@@ -178,7 +180,7 @@ const getWidth = computed(() => {
             class="border text-caption text-bold"
             name="rPlanning"
             to="/regional-planning"
-          ><q-tooltip v-if="!navState">Regional Planning</q-tooltip>
+            ><q-tooltip v-if="!navState">Regional Planning</q-tooltip>
             <q-item class="q-pa-none">
               <q-item-section class="" avatar>
                 <q-img class="" src="img/rPlanning_icon_sm.png"></q-img>
@@ -197,7 +199,7 @@ const getWidth = computed(() => {
             class="border text-caption text-bold"
             name="cPlanning"
             to="/community-planning"
-          ><q-tooltip v-if="!navState">Community Planning</q-tooltip>
+            ><q-tooltip v-if="!navState">Community Planning</q-tooltip>
             <q-item class="q-pa-none">
               <q-item-section class="" avatar>
                 <q-img src="img/cPlanning_icon_sm.png"></q-img>
@@ -211,14 +213,12 @@ const getWidth = computed(() => {
               </q-item-section>
             </q-item>
           </q-route-tab>
-         
-    
           <q-route-tab
             :ripple="false"
             class="border text-caption text-bold"
             name="risk"
             to="/risk-explorer"
-          ><q-tooltip v-if="!navState">Risk Explorer</q-tooltip>
+            ><q-tooltip v-if="!navState">Risk Explorer</q-tooltip>
             <q-item class="q-pa-none">
               <q-item-section class="" avatar>
                 <q-img src="img/risk_icon_sm.png"></q-img>
@@ -230,14 +230,44 @@ const getWidth = computed(() => {
             </q-item>
           </q-route-tab>
         </q-tabs>
-        <div style="position: absolute; bottom: 5px; left: 130px" class="half-circle" v-if="navState">
-          <q-btn flat round padding="xs" size="xl" color="white" icon="chevron_left" @click="navState = false"></q-btn>
+        <div
+          style="position: absolute; bottom: 5px; left: 130px"
+          class="half-circle"
+          v-if="navState"
+        >
+          <q-btn
+            flat
+            round
+            padding="xs"
+            size="xl"
+            color="white"
+            icon="chevron_left"
+            @click="navState = false"
+          ></q-btn>
         </div>
-        <div style="position: absolute; bottom: 5px; left: 10px" class="half-circle" v-if="!navState">
-          <q-btn flat round padding="xs" size="xl" color="white" icon="chevron_right" @click="navState = true"></q-btn>
+        <div
+          style="position: absolute; bottom: 5px; left: 10px"
+          class="half-circle"
+          v-if="!navState"
+        >
+          <q-btn
+            flat
+            round
+            padding="xs"
+            size="xl"
+            color="white"
+            icon="chevron_right"
+            @click="navState = true"
+          ></q-btn>
         </div>
       </div>
-      <div class="col" :style="getWidth"><RouterView /></div>
+      <div class="col" :style="getWidth">
+        <router-view v-slot="{ Component }">
+          <KeepAlive  include="FloodSeaLevelRise">
+            <component :is="Component" />
+          </KeepAlive>
+        </router-view>
+      </div>
       <div class="col"><the-map></the-map></div>
     </q-page-container>
   </q-layout>

@@ -1,6 +1,9 @@
 <script setup>
 import { useProjectsStore } from '@/stores/ResilienceProjects'
 import { onMounted, ref } from 'vue'
+import { useMapStore } from '@/stores/map'
+
+const mapStore = useMapStore()
 const projectStore = useProjectsStore()
 const imageDialogVisible = ref(false)
 const imgSrc= ''
@@ -14,9 +17,7 @@ const imgSrc= ''
 
 onMounted(() => {
     let map = document.querySelector("arcgis-map").map;
-    map.layers.forEach(function(layer) {
-      layer.visible = false;
-    });
+    mapStore.clearAppLayers()
     let layer = map.findLayerById('projects');
     layer.visible = true
     let sub = layer.findSublayerById(0);
@@ -175,8 +176,8 @@ function removeDef(i){
         </q-tab-panels>
     </div>
     <div class="row items-center q-mt-lg">
-      <q-btn href="http://127.0.0.1:5501/plugins/regional-resilience-projects/assets/Strategy_Definitions.pdf" target="_blank" outline size="12px" icon="img:/img/pdf.svg" label="Strategy Definitions" color="secondary" stack class="q-mr-xs"></q-btn>
-      <q-btn href="http://127.0.0.1:5501/plugins/regional-resilience-projects/assets/Project_Type_Definitions.pdf" target="_blank" outline size="12px" icon="img:/img/pdf.svg" label="Project Type Definitions" color="secondary" stack></q-btn>
+      <q-btn href="/docs/Strategy_Definitions.pdf" target="_blank" outline size="12px" icon="img:/img/pdf.svg" label="Strategy Definitions" color="secondary" stack class="q-mr-xs"></q-btn>
+      <q-btn href="/docs/Project_Type_Definitions.pdf" target="_blank" outline size="12px" icon="img:/img/pdf.svg" label="Project Type Definitions" color="secondary" stack></q-btn>
     </div>
       <q-dialog v-model="imageDialogVisible" full-width>
     <q-card>

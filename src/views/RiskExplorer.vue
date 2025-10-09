@@ -9,22 +9,19 @@ const riskStore = useRiskStore()
 onMounted(() => {
   //turn off all layers
   let map = document.querySelector('arcgis-map').map
-  map.layers.forEach(function (layer) {
-    layer.visible = false
-  })
+  mapStore.clearAppLayers()
   let layer = map.findLayerById('riskExplorerGraphics')
   layer.visible = true
   //mapStore.drawRiskExplorerFeatures()
 })
-function changeRiskLayer(){
-  let selected = riskStore.layerSelection;
+function changeRiskLayer() {
+  let selected = riskStore.layerSelection
   let map = document.querySelector('arcgis-map').map
   let riskScore = map.findLayerById('riskExplorerGraphics')
   let priorityAreas = map.findLayerById('riskExplorer')
-  riskScore.visible = false;
-  priorityAreas.visible = false;
-  selected == 'riskScore'? riskScore.visible = true : priorityAreas.visible = true
-  
+  riskScore.visible = false
+  priorityAreas.visible = false
+  selected == 'riskScore' ? (riskScore.visible = true) : (priorityAreas.visible = true)
 }
 </script>
 
@@ -130,4 +127,7 @@ function changeRiskLayer(){
       ></q-img>
     </div>
   </div>
+   <div class="text-center q-mt-lg">
+      <q-btn href="/docs/Arkema_et_al_2013_Nature_Climate_Change.pdf" target="_blank" outline size="12px" icon="img:/img/pdf.svg" label="Methods" color="secondary" stack></q-btn>
+    </div>
 </template>
