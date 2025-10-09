@@ -30,71 +30,46 @@ onMounted(() => {
 function expandItemGroup() {
   // Get a reference to the arcgis-layer-list component.
   const arcgisLayerList = document.querySelector('arcgis-layer-list')
-  //const map = document.querySelector('arcgis-map')
+
   // A function that executes each time a ListItem is created for a layer.
 
   arcgisLayerList.listItemCreatedFunction = (event) => {
     const { item } = event
-    // Add a calcite slider for updating opacity on group layers.
-    /*item.actionsSections = [
-      [
-        {
-          title: 'Go to full extent',
-          icon: 'zoom-out-fixed',
-          id: 'full-extent',
-        },
-        {
-          title: 'Layer information',
-          icon: 'information',
-          id: 'information',
-        },
-      ],
-      [
-        {
-          title: 'Increase opacity',
-          icon: 'chevron-up',
-          id: 'increase-opacity',
-        },
-        {
-          title: 'Decrease opacity',
-          icon: 'chevron-down',
-          id: 'decrease-opacity',
-        },
-      ],
-    ]*/
-
-    //open the group if it is the active group
     if (item.title == 'Connecticut') {
       item.open = true
     }
-  }
- /* arcgisLayerList.addEventListener('arcgisTriggerAction', (event) => {
-    console.log(event)
-    const id = event.detail.action.id
-    if (id === 'full-extent') {
-      map.goTo(event.detail.item.layer.fullExtent)
-      if (event.detail.item.layer.type == 'sublayer') {
-        map.goTo(event.detail.item.layer.parent.fullExtent)
-      }
-    } else if (id === 'increase-opacity') {
-      // If the increase-opacity action is triggered, then
-      // increase the opacity of the GroupLayer by 0.25
+    // Add a calcite slider for updating opacity on group layers.
+    if (item.layer.layer) {
+      if (item.layer.layer.type === 'map-image' || item.layer.layer.type === 'feature') {
+        const div = document.createElement('div')
+        div.id = 'opacity-slider'
+        div.innerHTML = 'Opacity'
+        const slider = document.createElement('calcite-slider')
+        slider.labelHandles = true
+        slider.labelTicks = true
+        slider.min = 0
+        slider.minLabel = '0'
+        slider.max = 1
+        slider.maxLabel = '1'
+        slider.scale = 's'
+        slider.step = 0.01
+        slider.value = 1
+        slider.ticks = 0.5
 
-      if (event.detail.item.layer.opacity < 1) {
-        event.detail.item.layer.opacity += 0.25
-      }
-    } else if (id === 'decrease-opacity') {
-      // If the decrease-opacity action is triggered, then
-      // decrease the opacity of the GroupLayer by 0.25
+        slider.addEventListener('calciteSliderChange', () => {
+          item.layer.layer.opacity = slider.value
+        })
 
-      if (event.detail.item.layer.opacity > 0) {
-        event.detail.item.layer.opacity -= 0.25
-      }
-    } else if (id === 'information') {
-      // If the information action is triggered, then
-      // open the item details page in a new tab
-      //window.open(event.detail.item.layer.url, '_blank')
-      const url = event.detail.item.layer.url + '?f=json'
+        
+        const infoButton = document.createElement('calcite-button');
+        infoButton.innerText = 'Layer Info';
+        infoButton.scale = 's';
+        infoButton.width = 'full';
+        infoButton.style.marginTop = '0.5rem';
+        infoButton.id = 'information'
+
+        infoButton.addEventListener('click', () => {
+            const url = item.layer.url + '?f=json'
       fetch(url)
         .then((response) => {
           if (!response.ok) {
@@ -103,21 +78,19 @@ function expandItemGroup() {
           return response.json()
         })
         .then((json) => {
-          console.log(json)
           $q.notify({
             html: true,
             message:
               json.description == ''
                 ? '<p style="font-size:25px; text-decoration: bold">' +
-                  event.detail.item.layer.title +
+                  item.layer.title +
                   '</p>' +
-                  json.serviceDescription
-                : json.description
-                  ? '<p style="font-size:25px; text-decoration: bold">' +
-                    event.detail.item.layer.title +
+                  'No description available'
+                : '<p style="font-size:25px; text-decoration: bold">' +
+                   item.layer.title +
                     '</p>' +
                     json.description
-                  : 'No description available',
+                 ,
             color: 'blue-grey-9',
             textColor: 'white',
             multiLine: true,
@@ -129,7 +102,7 @@ function expandItemGroup() {
                 color: 'white',
                 round: true,
                 handler: () => {
-                 
+
                 },
               },
             ],
@@ -138,9 +111,25 @@ function expandItemGroup() {
         .catch((error) => {
           console.error('Error fetching layer information:', error)
         })
+    
+
+        })
+
+
+        div.appendChild(slider)
+        div.appendChild(infoButton);
+
+        item.panel = {
+          content: div,
+          icon: 'ellipsis',
+          title: 'Change layer opacity',
+        }
+      }
     }
-  })*/
+  }
+
 }
+
 </script>
 <template>
   <q-bar class="bg-white" style="border-bottom: 1px solid lightgray">
