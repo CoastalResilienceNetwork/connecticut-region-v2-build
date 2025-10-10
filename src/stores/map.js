@@ -84,12 +84,7 @@ export const useMapStore = defineStore('mapStore', () => ({
     mapservice.sublayers.forEach((layer) => {
       layer.visible = false;
     });
-    const arcgisDistanceMeasurement2d = document.querySelector("arcgis-distance-measurement-2d");
-document.body.append(arcgisDistanceMeasurement2d);
-await arcgisDistanceMeasurement2d.componentOnReady();
-console.log("arcgis-distance-measurement-2d is ready to go!");
-console.log(arcgisDistanceMeasurement2d)
-arcgisDistanceMeasurement2d.clear()
+   
   }
   
 }
