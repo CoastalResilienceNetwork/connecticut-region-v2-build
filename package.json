@@ -11,7 +11,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
-    "@arcgis/core": "^4.32.3",
+    "@arcgis/core": "^4.32.10",
     "@arcgis/map-components": "^4.32.8",
     "@quasar/extras": "^1.16.17",
     "pinia": "^3.0.1",

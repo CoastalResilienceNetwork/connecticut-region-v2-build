@@ -13,7 +13,8 @@
     <p class="body2">
       Coastal Resilience is a decision support tool that provides local, regional, state and
       national stakeholders a step-wisee process to guide decisions to reduce the ecological and
-      socio-economic risks of coastal and inland hazards.
+      socio-economic risks of coastal and inland hazards. If you need help figuring out how to start, 
+      click on the Tour tab in the bottom left of the screen, or visit our <a href="https://coastalresilience.org/tools/training/" target="_blank" >Training</a> page.
     </p>
 
     <p class="text-body2 text-bold">Start exploring</p>

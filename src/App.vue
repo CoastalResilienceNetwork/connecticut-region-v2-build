@@ -5,6 +5,8 @@ import '@arcgis/map-components/components/arcgis-legend'
 import '@arcgis/map-components/components/arcgis-basemap-toggle'
 import '@arcgis/map-components/components/arcgis-layer-list'
 import '@arcgis/map-components/components/arcgis-search'
+import "@arcgis/map-components/components/arcgis-distance-measurement-2d";
+import "@arcgis/map-components/components/arcgis-expand";
 import { ref, computed } from 'vue'
 import TheMap from './components/TheMap.vue'
 import { useMapStore } from './stores/map.js'
