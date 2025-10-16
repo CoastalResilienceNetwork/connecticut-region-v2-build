@@ -295,6 +295,7 @@ onMounted(() => {
     <arcgis-basemap-toggle position="top-right" :next-basemap="'satellite'"></arcgis-basemap-toggle>
     <div style="position: absolute; top: 100px; right: 15px; z-index: 10">
       <calcite-button
+        id="clear"
         icon="layers"
         square
         :ripple="false"

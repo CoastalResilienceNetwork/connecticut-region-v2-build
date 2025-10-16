@@ -78,14 +78,26 @@ export const useMapStore = defineStore('mapStore', () => ({
       map.findLayerById('noaa5').visible = false
       map.findLayerById('noaa6').visible = false
   },
-  async clearOtherLayers(){
+  clearOtherLayers(){
     let map = document.querySelector("arcgis-map").map;
     let mapservice = map.findLayerById('connecticut')
     mapservice.sublayers.forEach((layer) => {
+    
       layer.visible = false;
     });
-   
-  }
+    console.log(map)
+    map.layers.items.forEach((layer) => {
+      if(layer.type == 'graphics' && layer.id !== 'graphicsLayer' && layer.id !== 'riskExplorerGraphics'){
+        console.log(layer)
+        layer.visible = false;
+      }
+    })
+   /* const arcgisDistanceMeasurement2d = document.querySelector("arcgis-distance-measurement-2d");
+    document.body.append(arcgisDistanceMeasurement2d);
+    arcgisDistanceMeasurement2d.componentOnReady().then(() => {
+      arcgisDistanceMeasurement2d.clear();
   
+    })*/
+  }
 }
 ));

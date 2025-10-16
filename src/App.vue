@@ -5,13 +5,16 @@ import '@arcgis/map-components/components/arcgis-legend'
 import '@arcgis/map-components/components/arcgis-basemap-toggle'
 import '@arcgis/map-components/components/arcgis-layer-list'
 import '@arcgis/map-components/components/arcgis-search'
-import "@arcgis/map-components/components/arcgis-distance-measurement-2d";
-import "@arcgis/map-components/components/arcgis-expand";
-import { ref, computed } from 'vue'
+import '@arcgis/map-components/components/arcgis-distance-measurement-2d'
+import '@arcgis/map-components/components/arcgis-expand'
+import { ref, computed, onMounted } from 'vue'
 import TheMap from './components/TheMap.vue'
 import { useMapStore } from './stores/map.js'
 import { useRoute } from 'vue-router'
-
+import { useShepherd } from 'vue-shepherd'
+const tour = useShepherd({
+  useModalOverlay: true,
+})
 const mapStore = useMapStore()
 const route = useRoute()
 const navState = ref(true)
@@ -30,6 +33,44 @@ const getWidth = computed(() => {
   }
 
   return 'max-width:' + pixelWidths[route.name] + 'px'
+})
+onMounted(async () => {
+  tour.addStep({
+    attachTo: { element: '#nav', on: 'right' },
+    title: '1: Navigation Menu',
+    text: "Each item listed in the sidebar is a mini Coastal Resilience app. These apps are intended to address a specific coastal issue for resilience, restoration and adaptation planning. You can have multiple apps running at the same time; Apps with a layer list will persist visibility of layers as you navigate other apps.  Use the clear map button to remove all layers from the map.",
+    cancelIcon: {
+      enabled: true,
+      label: '✖',
+      className: 'shepherd-cancel-icon',
+    },
+    buttons: [
+      {
+        text: 'Next',
+        action: tour.next,
+      },
+    ],
+  },
+ )
+ 
+ tour.addStep({
+    attachTo: { element: '#clear', on: 'bottom' },
+    title: '2: Map Tools',
+    text: "The tools located around the periphery of the map, let you explore the map: measure distance, zoom in and out on the map, clear the map of additonal layers and graphics, change the basemap, and view the legend.",
+    cancelIcon: {
+      enabled: true,
+      label: '✖',
+      className: 'shepherd-cancel-icon',
+    },
+    buttons: [
+      {
+        text: 'Finish',
+        action: tour.cancel
+        ,
+      },
+    ],
+  },
+ )
 })
 </script>
 
@@ -92,7 +133,7 @@ const getWidth = computed(() => {
     </q-header>
 
     <q-page-container class="row">
-      <div class="col bg-blue-grey-3" :style="getNavWidth">
+      <div class="col bg-blue-grey-3" :style="getNavWidth" id="nav">
         <q-tabs
           vertical
           class="text-primary text-left"
@@ -232,6 +273,14 @@ const getWidth = computed(() => {
             </q-item>
           </q-route-tab>
         </q-tabs>
+        <q-btn 
+        v-if="!navState"
+        style="position: absolute; bottom: 80px; left: 2px;" padding="12px" size="sm" color="secondary" stack icon="tour"
+        @click="tour.start()" square unelevated >start <br/> tour</q-btn>
+        <q-btn 
+        v-if="navState"
+        style="position: absolute; bottom: 80px; left: 2px;" padding="12px" size="sm" color="secondary" icon="tour"
+        @click="tour.start()" square unelevated label="Start tour"></q-btn>
         <div
           style="position: absolute; bottom: 5px; left: 130px"
           class="half-circle"
@@ -265,7 +314,7 @@ const getWidth = computed(() => {
       </div>
       <div class="col" :style="getWidth">
         <router-view v-slot="{ Component }">
-          <KeepAlive  include="FloodSeaLevelRise">
+          <KeepAlive include="FloodSeaLevelRise">
             <component :is="Component" />
           </KeepAlive>
         </router-view>
