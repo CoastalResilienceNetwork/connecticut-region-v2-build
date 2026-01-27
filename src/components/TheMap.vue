@@ -292,6 +292,7 @@ onMounted(() => {
       position="bottom-right"
       legend-style="classic"
     ></arcgis-legend>
+    <arcgis-zoom position="top-left"></arcgis-zoom>
     <arcgis-basemap-toggle position="top-right" :next-basemap="'satellite'"></arcgis-basemap-toggle>
     <div style="position: absolute; top: 100px; right: 15px; z-index: 10">
       <calcite-button

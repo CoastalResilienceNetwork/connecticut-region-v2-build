@@ -176,8 +176,8 @@ function removeDef(i){
         </q-tab-panels>
     </div>
     <div class="row items-center q-mt-lg">
-      <q-btn href="/docs/Strategy_Definitions.pdf" target="_blank" outline size="12px" icon="img:/img/pdf.svg" label="Strategy Definitions" color="secondary" stack class="q-mr-xs"></q-btn>
-      <q-btn href="/docs/Project_Type_Definitions.pdf" target="_blank" outline size="12px" icon="img:/img/pdf.svg" label="Project Type Definitions" color="secondary" stack></q-btn>
+      <q-btn href="docs/Strategy_Definitions.pdf" target="_blank" outline size="12px" icon="img:/img/pdf.svg" label="Strategy Definitions" color="secondary" stack class="q-mr-xs"></q-btn>
+      <q-btn href="docs/Project_Type_Definitions.pdf" target="_blank" outline size="12px" icon="img:/img/pdf.svg" label="Project Type Definitions" color="secondary" stack></q-btn>
     </div>
       <q-dialog v-model="imageDialogVisible" full-width>
     <q-card>
