@@ -135,7 +135,7 @@ function expandItemGroup() {
   <q-bar class="bg-white" style="border-bottom: 1px solid lightgray">
     <div class="text-caption text-bold">Community Planning</div>
   </q-bar>
-  <q-scroll-area :style="mobile ? 'height: calc(100vh - 390px)' : 'height: calc(100vh - 138px)'">
+  <q-scroll-area :style="mobile ? 'height: calc(100vh - 390px)' : 'height: calc(100vh - 100px)'">
     <arcgis-layer-list
       visibilityAppearance="checkbox"
       reference-element="my-map"
