@@ -16,7 +16,6 @@ onMounted(() => {
   const riskStore = useRiskStore()
   const mapStore = useMapStore()
 
-
   //Resilient Projects tab
   const graphicsLayer = new GraphicsLayer({
     id: 'graphicsLayer',
@@ -275,8 +274,6 @@ onMounted(() => {
       })
     })
   })
-
- 
 })
 </script>
 
@@ -303,9 +300,16 @@ onMounted(() => {
         class="bg-white text-primary"
         size="12px"
         @click="mapStore.clearOtherLayers()"
-      >Clear Map</calcite-button>
+        >Hide Overlays</calcite-button
+      >
     </div>
-    <arcgis-expand id="expandMeasurement_line" expanded close-on-esc position="top-left" mode="floating">
+    <arcgis-expand
+      id="expandMeasurement_line"
+      expanded
+      close-on-esc
+      position="top-left"
+      mode="floating"
+    >
       <arcgis-distance-measurement-2d></arcgis-distance-measurement-2d>
     </arcgis-expand>
   </arcgis-map>
