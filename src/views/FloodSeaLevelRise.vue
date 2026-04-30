@@ -26,6 +26,8 @@ function setVisibleLayer() {
   let layer = map.findLayerById('floodSeaLevelRise')
   //turn off all layers
   layer.sublayers.forEach((s) => (s.visible = false))
+  // layer.layers.forEach((s) => (s.visible = false))
+  // layer.allLayers.items.allSublayers.items.forEach((s) => (s.visible = false))
   let slrLayers = ['noaa0', 'noaa1', 'noaa2', 'noaa3', 'noaa4', 'noaa5', 'noaa6']
   slrLayers.forEach((id) => {
     let l = map.findLayerById(id)
@@ -37,42 +39,43 @@ function setVisibleLayer() {
     return
   } else if (hazard.value.value == 'cr') {
     let lookup = {
-      '2080-high-cat2': 0,
-      '2080-med-cat2': 1,
-      '2080-low-cat2': 2,
-      '2050-high-cat2': 3,
-      '2050-med-cat2': 4,
-      '2050-low-cat2': 5,
-      '2020-high-cat2': 6,
-      '2020-med-cat2': 7,
-      '2020-low-cat2': 8,
-      '2080-high-cat3': 9,
-      '2080-med-cat3': 10,
-      '2080-low-cat3': 11,
-      '2050-high-cat3': 12,
-      '2050-med-cat3': 13,
-      '2050-low-cat3': 14,
-      '2020-high-cat3': 15,
-      '2020-med-cat3': 16,
-      '2020-low-cat3': 17,
-      '2080-high-none': 18,
-      '2080-med-none': 19,
-      '2080-low-none': 20,
-      '2050-high-none': 21,
-      '2050-med-none': 22,
-      '2050-low-none': 23,
-      '2020-high-none': 24,
-      '2020-med-none': 25,
-      '2020-low-none': 26,
-      'current-low-cat3': 27,
-      'current-med-cat3': 27,
-      'current-high-cat3': 27,
-      'current-low-cat2': 28,
-      'current-med-cat2': 28,
-      'current-high-cat2': 28,
+      '2080-high-cat2': 11,
+      '2080-med-cat2': 12,
+      '2080-low-cat2': 13,
+      '2050-high-cat2': 14,
+      '2050-med-cat2': 15,
+      '2050-low-cat2': 16,
+      '2020-high-cat2': 17,
+      '2020-med-cat2': 18,
+      '2020-low-cat2': 19,
+      '2080-high-cat3': 20,
+      '2080-med-cat3': 21,
+      '2080-low-cat3': 22,
+      '2050-high-cat3': 23,
+      '2050-med-cat3': 24,
+      '2050-low-cat3': 25,
+      '2020-high-cat3': 26,
+      '2020-med-cat3': 27,
+      '2020-low-cat3': 28,
+      '2080-high-none': 29,
+      '2080-med-none': 30,
+      '2080-low-none': 31,
+      '2050-high-none': 32,
+      '2050-med-none': 33,
+      '2050-low-none': 34,
+      '2020-high-none': 35,
+      '2020-med-none': 36,
+      '2020-low-none': 37,
+      'current-low-cat3': 38,
+      'current-med-cat3': 38,
+      'current-high-cat3': 38,
+      'current-low-cat2': 39,
+      'current-med-cat2': 39,
+      'current-high-cat2': 39,
     }
     let id = lookup[climateYear.value + '-' + seaLevel.value + '-' + stormType.value]
     let sublayer = layer.sublayers.find((s) => s.id === id)
+    // let sublayer = layer.allLayers.items.allSublayers.items.find((s) => s.id === id)
     sublayer.visible = true
   }
 }

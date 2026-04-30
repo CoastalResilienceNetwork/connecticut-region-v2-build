@@ -18,7 +18,7 @@ onMounted(() => {
   layer.listMode = 'show' //show in layer list
 
   layer.when(() => {
-    layer.sublayers.forEach((sublayer) => {
+    layer.allLayers.items.forEach((sublayer) => {
       sublayer.listMode = 'show'
       if (sublayer.id < 52) {
         sublayer.listMode = 'hide' // 👈 hides from LayerList
@@ -60,64 +60,57 @@ function expandItemGroup() {
           item.layer.layer.opacity = slider.value
         })
 
-        
-        const infoButton = document.createElement('calcite-button');
-        infoButton.innerText = 'Layer Info';
-        infoButton.scale = 's';
-        infoButton.width = 'full';
-        infoButton.style.marginTop = '0.5rem';
+        const infoButton = document.createElement('calcite-button')
+        infoButton.innerText = 'Layer Info'
+        infoButton.scale = 's'
+        infoButton.width = 'full'
+        infoButton.style.marginTop = '0.5rem'
         infoButton.id = 'information'
 
         infoButton.addEventListener('click', () => {
-            const url = item.layer.url + '?f=json'
-      fetch(url)
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error(`Response status: ${response.status}`)
-          }
-          return response.json()
+          const url = item.layer.url + '?f=json'
+          fetch(url)
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error(`Response status: ${response.status}`)
+              }
+              return response.json()
+            })
+            .then((json) => {
+              $q.notify({
+                html: true,
+                message:
+                  json.description == ''
+                    ? '<p style="font-size:25px; text-decoration: bold">' +
+                      item.layer.title +
+                      '</p>' +
+                      'No description available'
+                    : '<p style="font-size:25px; text-decoration: bold">' +
+                      item.layer.title +
+                      '</p>' +
+                      json.description,
+                color: 'blue-grey-9',
+                textColor: 'white',
+                multiLine: true,
+                icon: 'info',
+                timeout: 0,
+                actions: [
+                  {
+                    icon: 'close',
+                    color: 'white',
+                    round: true,
+                    handler: () => {},
+                  },
+                ],
+              })
+            })
+            .catch((error) => {
+              console.error('Error fetching layer information:', error)
+            })
         })
-        .then((json) => {
-          $q.notify({
-            html: true,
-            message:
-              json.description == ''
-                ? '<p style="font-size:25px; text-decoration: bold">' +
-                  item.layer.title +
-                  '</p>' +
-                  'No description available'
-                : '<p style="font-size:25px; text-decoration: bold">' +
-                   item.layer.title +
-                    '</p>' +
-                    json.description
-                 ,
-            color: 'blue-grey-9',
-            textColor: 'white',
-            multiLine: true,
-            icon: 'info',
-            timeout: 0,
-            actions: [
-              {
-                icon: 'close',
-                color: 'white',
-                round: true,
-                handler: () => {
-
-                },
-              },
-            ],
-          })
-        })
-        .catch((error) => {
-          console.error('Error fetching layer information:', error)
-        })
-    
-
-        })
-
 
         div.appendChild(slider)
-        div.appendChild(infoButton);
+        div.appendChild(infoButton)
 
         item.panel = {
           content: div,
@@ -127,9 +120,7 @@ function expandItemGroup() {
       }
     }
   }
-
 }
-
 </script>
 <template>
   <q-bar class="bg-white" style="border-bottom: 1px solid lightgray">
